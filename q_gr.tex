@@ -15,6 +15,8 @@
 
 \usepackage{ulem}
 
+\usepackage{listings}
+\usepackage{color}
 
 \usepackage{hyperref}
 \usepackage{latexsym,url}
@@ -164,13 +166,46 @@ Feynman, R. P. (1982). \textit{"Simulating physics with computers"}. Internation
 
 \frametitle{Освой линейную алгебру за 240 секунд!}
 
+\begin{defin}
+ \textbf{Cобственный вектор} -- любой ненулевой вектор $\vec{x}$, который отображается оператором в коллинеарный $\lambda \vec{x}$, а соответствующий скаляр $\lambda$ называется \textit{собственным значением} оператора.
+\end{defin}
 
-% TODO собственные вектора
+\[
+\begin{pmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}\cr \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}\end{pmatrix}
+\begin{pmatrix}1\cr -\sqrt{2}-1\end{pmatrix} =
+\begin{pmatrix}-1\cr \sqrt{2}+1\end{pmatrix}
+\]
 
+\begin{center}
+\begin{tabular}{ll}
+\begin{tikzpicture}[scale=1]
+% \clip (-4.63205,-1.88345) rectangle (4.06915,1.88345);
+\draw [step=.1cm,help lines] (0,0) grid (1,1);
+\draw [help lines] (-1,0) grid (0,1);
+\draw [help lines] (0,-1) grid (1,0);
+\draw [help lines] (-1,-1) grid (0,0);
+\draw [color=black,->] (-1,0) -- (1,0);
+\draw [color=black,->] (0,-1) -- (0,1);
+%% вектор;
+\draw[blue, line width=1pt, solid, ->] (0,0) -- (1,0);
+\draw[red, line width=1pt, solid, ->] (0,0) -- (1,-2.414);
 
+\end{tikzpicture} & 
+\begin{tikzpicture}[scale=1]
+% \clip (-4.63205,-1.88345) rectangle (4.06915,1.88345);
+\draw [step=.1cm,help lines] (0,0) grid (1,1);
+\draw [help lines] (-1,0) grid (0,1);
+\draw [help lines] (0,-1) grid (1,0);
+\draw [help lines] (-1,-1) grid (0,0);
+\draw [color=black,->] (-1,0) -- (1,0);
+\draw [color=black,->] (0,-1) -- (0,1);
+%% вектор;
+\draw[blue, line width=1pt, solid, ->] (0,0) -- (0.707,0.707);
+\draw[red, line width=1pt, solid, ->] (0,0) -- (-1,2.414);
 
-
-
+\end{tikzpicture} 
+\end{tabular}
+\end{center}
 
 
 
@@ -181,12 +216,21 @@ Feynman, R. P. (1982). \textit{"Simulating physics with computers"}. Internation
 \frametitle{Стохастические вычисления}
 
 
-% TODO стохастические вычисления
+\begin{center}
+\includegraphics[scale=0.5]{mar.pdf}
+\end{center}
 
 
+$P= \begin{pmatrix}0.9 & 0.5\cr 0.1 & 0.5\end{pmatrix}$ --матрица перехода для некоторой цепи Маркова.
+Входные данные: $x=\begin{pmatrix}1\cr 0\end{pmatrix}$ -- у нас хорошая погода.
+\[
+\begin{pmatrix}0.9 & 0.5\cr 0.1 & 0.5\end{pmatrix}
+\begin{pmatrix}1\cr 0\end{pmatrix} =
+\begin{pmatrix}0.9\cr 0.1\end{pmatrix}
+\]
+-- с вероятностью 10\% завтра пойдет дождь.
 
-
-
+Неподвижная точка  $\approx \begin{pmatrix}0.833\cr 0.167\end{pmatrix}$
 
 
 
@@ -266,13 +310,10 @@ $ p_i \geq 0, \sum_{i=1}^{n} p_i =1 $ & $ \alpha \in \mathbb{C},  \sum_{i=1}^{n}
 \frame{
 
 \frametitle{Суперпозиция}
+\begin{astat}
 % Возможно, для прогресса в понимании таких явлений намнедостает математической теории квантовых автоматов Такие объекты могли бы показать нам математические модели детерминированных процессов с совершенно непривычными свойствами. 
-... Одна из причин этого в том, что квантовое пространство состояний обладает гораздо большей емкостью, чем классическое: там, где в классике имеется N дискретных состояний, в квантовой теории, допускающей их суперпозицию, имеется $c^N$ планковских ячеек. При объединении классических систем их числа состояний $N_1$ и $N_2$ перемножаются, а в квантовом варианте получается $c^{N_1 N_2}$.
-\smallskip
-\smallskip
-% \vskip{5mm}
-
-
+ ... Одна из причин этого в том, что квантовое пространство состояний обладает гораздо большей емкостью, чем классическое: там, где в классике имеется N дискретных состояний, в квантовой теории, допускающей их суперпозицию, имеется $c^N$ планковских ячеек. При объединении классических систем их числа состояний $N_1$ и $N_2$ перемножаются, а в квантовом варианте получается $c^{N_1 N_2}$.
+\end{astat}
 Ю. Манин \textit{``Вычислимое и невычислимое''}
 
 % \begin{astat}
@@ -290,7 +331,7 @@ $ p_i \geq 0, \sum_{i=1}^{n} p_i =1 $ & $ \alpha \in \mathbb{C},  \sum_{i=1}^{n}
 }
 \frame{
 
-\frametitle{Суперпозиция}
+\frametitle{Коллапс}
 % Возможно, для прогресса в понимании таких явлений намнедостает математической теории квантовых автоматов Такие объекты могли бы показать нам математические модели детерминированных процессов с совершенно непривычными свойствами. 
 ... Одна из причин этого в том, что квантовое пространство состояний обладает гораздо большей емкостью, чем классическое: там, где в классике имеется N дискретных состояний, в квантовой теории, допускающей их суперпозицию, имеется $c^N$ планковских ячеек. При объединении классических систем их числа состояний $N_1$ и $N_2$ перемножаются, а в квантовом варианте получается $c^{N_1 N_2}$.
 
@@ -305,13 +346,15 @@ $ p_i \geq 0, \sum_{i=1}^{n} p_i =1 $ & $ \alpha \in \mathbb{C},  \sum_{i=1}^{n}
 
 \frame{
 
-\frametitle{Суперпозиция}
+\frametitle{Измерение и наблюдаемые}
 
 \begin{stat}
  При измерении наблюдаемой $A$ ее состояние редуцируется в один из векторов оператора $\hat{A}$
 \end{stat}
-% TODO Суперпозиция
 
+\begin{center}
+\includegraphics[scale=0.45]{sc.pdf}
+\end{center}
 
 }
 
@@ -500,36 +543,90 @@ Sergio Boixo, Troels F. Rønnow, Sergei V. Isakov, Zhihui Wang, David Wecker, Da
 
 % % % % % % % % % % % % % % 
 
-
 \frame{
 
-\frametitle{Влияние -- цифровая физика}
-% TODO цифровая физика
-
+\frametitle{Влияние -- квантовая связь}
+\includegraphics[scale=0.1]{qp1.pdf}
 }
 
 \frame{
 
 \frametitle{Влияние -- квантовая связь}
-% TODO квантовая связь
+\includegraphics[scale=0.1]{qp2.pdf}
+}
+
+\frame{
+
+\frametitle{Влияние -- цифровая физика}
+Широко известные не в столь узких кругах обсуждения ``информационных'' аспектов физики:
+\begin{itemize}
+ \item Konrad Zuse \textit{Rechnender Raum}\footnote{Вычислительное пространство} (1967)
+\item Lloyd, S., \textit{Programming the Universe: A Quantum Computer Scientist Takes On the Cosmos} (2006)
+\item Хокинг, Прескилл,Сасскинд  и срачик о термодинамике черных дыр, которые ``теряют'' информацию.
+
+\end{itemize}
 
 }
 
+\frame{
+\frametitle{Влияние -- цифровая физика}
+Интерпретации квантовой механики:
+\begin{enumerate}
+ \item Копенгагенская
+\item Многомировая
+\item Теории скрытого параметра(Schrödinger, Bohmian Mechanics )
+\end{enumerate}
+\begin{center}
+\large В чем же разница? 
+\end{center}
 
+}
+
+\frame{
+\frametitle{Влияние -- цифровая физика}
+Интерпретации квантовой механики:
+\begin{enumerate}
+ \item Копенгагенская
+\item Многомировая
+\item Теории скрытого параметра(Schrödinger, Bohmian Mechanics )
+\end{enumerate}
+\begin{center}
+\large В чем же разница? 
+
+
+
+\Huge РАЗНЫЕ ВСЕЛЕННЫЕ!
+
+\normalsize
+с разными вычислительными ресурсами!
+\end{center}
+
+
+}
 
 \frame{
 
 \frametitle{Влияние -- матан}
 % TODO матан
+\begin{astat}
+   We should expect a mathematical question to have a definite answer, if and only if we can phrase
+the question in terms of a physical process we can imagine.
+\end{astat}
 
+
+
+David Deutsch
+
+
+
+У нас есть разные модели для 
 }
 
-\frame{
-
-\frametitle{Влияние -- теория эволюции}
-% TODO теория эволюции
-
-}
+% \frame{
+% 
+% \frametitle{Влияние -- теория эволюции}
+% 
+% }
 
 
 \frame{
@@ -573,46 +670,76 @@ Sergio Boixo, Troels F. Rønnow, Sergei V. Isakov, Zhihui Wang, David Wecker, Da
 \frame{
 
 \frametitle{Scheme simulator}
-% TODO Scheme simulator
-http://www.het.brown.edu/people/andre/qlambda/
+\begin{description}
+  \item[Что?] Scheme
+ \item[Где?] http://www.het.brown.edu/people/andre/qlambda/
+ \item[Кто виноват?] André van Tonder.
+\end{description}
 }
 
-\frame{
-
-\frametitle{Scheme simulator}
-
-}
-
-\frame{
-
-\frametitle{Scheme simulator}
-
-}
-
-\frame{
-
-\frametitle{QIO -- Quantum IO Monad }
-% TODO QIO
-http://hackage.haskell.org/package/QIO
-}
+% \frame{
+% 
+% \frametitle{Scheme simulator}
+% 
+% }
+% 
+% \frame{
+% 
+% \frametitle{Scheme simulator}
+% 
+% }
 
 \frame{
 
 \frametitle{QIO -- Quantum IO Monad }
+\begin{description}
+  \item[Что?] Haskell
+ \item[Где?] http://hackage.haskell.org/package/QIO
+ \item[Кто виноват?] Alexander S. Green
+\end{description}
 
 }
 
-\frame{
-
-\frametitle{QIO -- Quantum IO Monad }
-
-}
+% \frame{
+% 
+% \frametitle{QIO -- Quantum IO Monad }
+% 
+% }
+% 
+% \frame{
+% 
+% \frametitle{QIO -- Quantum IO Monad }
+% 
+% }
 
 \frame{
 
 \frametitle{Maxima -- qinf}
-% TODO qinf
+\begin{description}
+  \item[Что?] Maxima
+ \item[Где?] http://www.johnlapeyre.com/qinf/
+ \item[Кто виноват?] G. John Lapeyre, Jr.
+\end{description}
 }
+
+\frame{
+\frametitle{List of QC simulators}
+\begin{itemize}
+ \item http://www.quantiki.org/wiki/List\_of\_QC\_simulators
+ \item curl, grep, sort -u, wc -l, немного магии...
+ \item 95
+ \item ??????
+ \item PROFIT
+\end{itemize}
+
+}
+
+
+
+
+
+
+
 % % % % % % % % % % % % % % 
 \frame{
 
@@ -634,14 +761,13 @@ http://hackage.haskell.org/package/QIO
 
 \frame{
 \frametitle{Что почитать?}
-% TODO Статьи
 Статьи:
 \begin{itemize}
  \item Feynman, R. P. (1982). \textit{"Simulating physics with computers"}. (Перепечетано в Feynman lectures on computation)
  \item \textit{Quantum annealing with more than one hundred qubits},  	arXiv:1304.4595 
- \item 
- \item 
- \item 
+ \item \textit{Physics, Topology, Logic and Computation: A Rosetta Stone},  	arXiv:0903.0340
+ \item \textit{Quantum Proofs for Classical Theorems}, 10.4086/toc.gs.2011.002
+ \item \textit{NP-complete Problems and Physical Reality},  quant-ph/0502072
 
 \end{itemize}
 
