@@ -1,5 +1,5 @@
 \documentclass{beamer}
-
+\usepackage{etex}
 \usepackage[utf8]{inputenc}
 
 \usepackage{amsmath}
@@ -10,19 +10,29 @@
 
 \usepackage{fontenc}
 \usepackage{graphicx}
-
+\usepackage{wrapfig}
 \usepackage{tikz}
 
 \usepackage{ulem}
 
 \usepackage{listings}
 \usepackage{color}
-
 \usepackage{hyperref}
+% \usepackage[unicode,pdfusetitle, bookmarks=true, bookmarksnumbered=true,bookmarksopen=true,bookmarksopenlevel=1]{hyperref}
+% \hypersetup{backref,colorlinks=true,linkcolor=blue,citecolor=green,bookmarks=false}
 \usepackage{latexsym,url}
-\usepackage{braket}
+%  \bra and \ket are already defined in Qcircuit
+% \usepackage{braket} 
+\usepackage{multirow}
 
-
+\input{Qcircuit}
+\newcommand {\Had} {H}%{\mbox{\sf{H}}}
+\newcommand {\phase} {S}%{\mbox{\sf{S}}}
+\newcommand {\R} {R_3}%{\mbox{\sf{R}}_3}
+\newcommand {\cnot} {\textit{cnot}\,}%{\mbox{\sf{cnot}}}
+\newcommand {\X} {X}%{\mbox{\sf{X}}}
+\newcommand {\Y} {Y}%{\mbox{\sf{Y}}}
+\newcommand {\Z} {Z}%{\mbox{\sf{Z}}}
 
 
 \usetheme{Warsaw}
@@ -35,6 +45,8 @@
 \newtheorem{theor}{Теорема}
 \newtheorem{astat}{}
 \newtheorem{stat}{Постулат}
+
+
 
 \begin{document}
 \frame{\titlepage}
@@ -151,70 +163,13 @@ Feynman, R. P. (1982). \textit{"Simulating physics with computers"}. Internation
 \end{tikzpicture} 
 \end{tabular}
 \end{center}
-
-
-
-
-
-
-
-
 }
 
 
-\frame{
 
-\frametitle{Освой линейную алгебру за 240 секунд!}
-
-\begin{defin}
- \textbf{Cобственный вектор} -- любой ненулевой вектор $\vec{x}$, который отображается оператором в коллинеарный $\lambda \vec{x}$, а соответствующий скаляр $\lambda$ называется \textit{собственным значением} оператора.
-\end{defin}
-
-\[
-\begin{pmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}\cr \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}\end{pmatrix}
-\begin{pmatrix}1\cr -\sqrt{2}-1\end{pmatrix} =
-\begin{pmatrix}-1\cr \sqrt{2}+1\end{pmatrix}
-\]
-
-\begin{center}
-\begin{tabular}{ll}
-\begin{tikzpicture}[scale=1]
-% \clip (-4.63205,-1.88345) rectangle (4.06915,1.88345);
-\draw [step=.1cm,help lines] (0,0) grid (1,1);
-\draw [help lines] (-1,0) grid (0,1);
-\draw [help lines] (0,-1) grid (1,0);
-\draw [help lines] (-1,-1) grid (0,0);
-\draw [color=black,->] (-1,0) -- (1,0);
-\draw [color=black,->] (0,-1) -- (0,1);
-%% вектор;
-\draw[blue, line width=1pt, solid, ->] (0,0) -- (1,0);
-\draw[red, line width=1pt, solid, ->] (0,0) -- (1,-2.414);
-
-\end{tikzpicture} & 
-\begin{tikzpicture}[scale=1]
-% \clip (-4.63205,-1.88345) rectangle (4.06915,1.88345);
-\draw [step=.1cm,help lines] (0,0) grid (1,1);
-\draw [help lines] (-1,0) grid (0,1);
-\draw [help lines] (0,-1) grid (1,0);
-\draw [help lines] (-1,-1) grid (0,0);
-\draw [color=black,->] (-1,0) -- (1,0);
-\draw [color=black,->] (0,-1) -- (0,1);
-%% вектор;
-\draw[blue, line width=1pt, solid, ->] (0,0) -- (0.707,0.707);
-\draw[red, line width=1pt, solid, ->] (0,0) -- (-1,2.414);
-
-\end{tikzpicture} 
-\end{tabular}
-\end{center}
-
-
-
-}
 
 \frame{
-
 \frametitle{Стохастические вычисления}
-
 
 \begin{center}
 \includegraphics[scale=0.5]{mar.pdf}
@@ -308,7 +263,6 @@ $ p_i \geq 0, \sum_{i=1}^{n} p_i =1 $ & $ \alpha \in \mathbb{C},  \sum_{i=1}^{n}
 }
 
 \frame{
-
 \frametitle{Суперпозиция}
 \begin{astat}
 % Возможно, для прогресса в понимании таких явлений намнедостает математической теории квантовых автоматов Такие объекты могли бы показать нам математические модели детерминированных процессов с совершенно непривычными свойствами. 
@@ -329,8 +283,8 @@ $ p_i \geq 0, \sum_{i=1}^{n} p_i =1 $ & $ \alpha \in \mathbb{C},  \sum_{i=1}^{n}
 
 
 }
-\frame{
 
+\frame{
 \frametitle{Коллапс}
 % Возможно, для прогресса в понимании таких явлений намнедостает математической теории квантовых автоматов Такие объекты могли бы показать нам математические модели детерминированных процессов с совершенно непривычными свойствами. 
 ... Одна из причин этого в том, что квантовое пространство состояний обладает гораздо большей емкостью, чем классическое: там, где в классике имеется N дискретных состояний, в квантовой теории, допускающей их суперпозицию, имеется $c^N$ планковских ячеек. При объединении классических систем их числа состояний $N_1$ и $N_2$ перемножаются, а в квантовом варианте получается $c^{N_1 N_2}$.
@@ -345,11 +299,10 @@ $ p_i \geq 0, \sum_{i=1}^{n} p_i =1 $ & $ \alpha \in \mathbb{C},  \sum_{i=1}^{n}
 }
 
 \frame{
-
 \frametitle{Измерение и наблюдаемые}
 
 \begin{stat}
- При измерении наблюдаемой $A$ ее состояние редуцируется в один из векторов оператора $\hat{A}$
+ При измерении наблюдаемой $A$ ее состояние редуцируется в один из собственных векторов оператора $\hat{A}$
 \end{stat}
 
 \begin{center}
@@ -359,10 +312,115 @@ $ p_i \geq 0, \sum_{i=1}^{n} p_i =1 $ & $ \alpha \in \mathbb{C},  \sum_{i=1}^{n}
 }
 
 \frame{
+\frametitle{Продвинутый курс линейной алгебры для чайников}
 
-\frametitle{Операторы}
-% TODO Операторы
+\begin{defin}
+ \textbf{Cобственный вектор} -- любой ненулевой вектор $\vec{x}$, который отображается оператором в коллинеарный $\lambda \vec{x}$, а соответствующий скаляр $\lambda$ называется \textit{собственным значением} оператора.
+\end{defin}
+
+\[
+\begin{pmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}\cr \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}\end{pmatrix}
+\begin{pmatrix}1\cr -\sqrt{2}-1\end{pmatrix} =
+\begin{pmatrix}-1\cr \sqrt{2}+1\end{pmatrix}
+\]
+
+\begin{center}
+\begin{tabular}{ll}
+\begin{tikzpicture}[scale=1]
+% \clip (-4.63205,-1.88345) rectangle (4.06915,1.88345);
+\draw [step=.1cm,help lines] (0,0) grid (1,1);
+\draw [help lines] (-1,0) grid (0,1);
+\draw [help lines] (0,-1) grid (1,0);
+\draw [help lines] (-1,-1) grid (0,0);
+\draw [color=black,->] (-1,0) -- (1,0);
+\draw [color=black,->] (0,-1) -- (0,1);
+%% вектор;
+\draw[blue, line width=1pt, solid, ->] (0,0) -- (1,0);
+% \draw[red, line width=1pt, solid, ->] (0,0) -- (1,-2.414);
+\draw[red, line width=1pt, solid, ->] (0,0) -- (1/2.6131259,-2.414/2.6131259 );
+\end{tikzpicture} & 
+\begin{tikzpicture}[scale=1]
+% \clip (-4.63205,-1.88345) rectangle (4.06915,1.88345);
+\draw [step=.1cm,help lines] (0,0) grid (1,1);
+\draw [help lines] (-1,0) grid (0,1);
+\draw [help lines] (0,-1) grid (1,0);
+\draw [help lines] (-1,-1) grid (0,0);
+\draw [color=black,->] (-1,0) -- (1,0);
+\draw [color=black,->] (0,-1) -- (0,1);
+%% вектор;
+\draw[blue, line width=1pt, solid, ->] (0,0) -- (0.707,0.707);
+% \draw[red, line width=1pt, solid, ->] (0,0) -- (-1,2.414);
+\draw[red, line width=1pt, solid, ->] (0,0) -- (-1/2.6131259,2.414/2.6131259);
+\end{tikzpicture} 
+\end{tabular}
+\end{center}
+
+
+
 }
+
+
+
+\frame{
+\frametitle{Операторы}
+\begin{defin}
+ Оператор $\hat{P}$, для которого $\hat{P}^2 = \hat{P}$ называется \textbf{проектором}.
+\end{defin}
+\begin{center}
+% \begin{tabular}{c|c}
+% \begin{tikzpicture}[scale=2]
+%  % \clip (-4.63205,-1.88345) rectangle (4.06915,1.88345);
+% % \draw [help lines] (0,0) grid (1,1);
+% % \draw [help lines] (-1,0) grid (0,1);
+% % \draw [help lines] (0,-1) grid (1,0);
+% % \draw [help lines] (-1,-1) grid (0,0);
+% \draw [color=black,->] (-1,0) -- (1,0);
+% \draw [color=black,->] (0,-1) -- (0,1);
+% %% вектор;
+% \draw[blue, line width=1pt, solid, ->] (0,0) -- (0.707,0.707);
+% \draw[red, dashed] (0.707,0.707) -- (0.707,0);
+% 
+% \node (X) at (1.2,0) {$\ket{0}$};
+% \node (Y) at (0,1.1) {$\ket{1}$};
+% \node (P) at (0.85,0.85) {$\ket{\psi}$};
+% \end{tikzpicture}
+% & $\|x\|^2=\sum_{k=1}^{\infty}\left|\langle x,e_k\rangle\right|^2.$
+% \end{tabular}
+% Равенство Парсеваля: $\|x\|^2=\sum_{k=1}^{\infty}\left|\langle x,e_k\rangle\right|^2$
+\begin{tabular}{cc}
+\multirow{5}{*}{\includegraphics[scale=1.8]{p.pdf}} &  \\
+% \cline{2-2} 
+& \\
+& \\
+& \\
+ &  \\
+\end{tabular}
+\end{center}
+}
+
+
+\frame{
+\frametitle{Сфера Блоха}
+
+% \begin{center}
+\begin{tabular}{cc}
+\multirow{5}{*}{\includegraphics[scale=0.7]{bloch.pdf}} &  $ \ket{\psi}=\alpha\ket{0}+\beta\ket{1} = \begin{pmatrix}\alpha\cr \beta\end{pmatrix}$ \\
+% \cline{2-2} 
+& \\
+& $ \left \| \alpha \right \|^2 + \left \| \beta \right \|^2=1 $\\
+& \\
+ &  $\ket{\psi}=e^{-i\phi/2}\cos\frac{\theta}{2}\ket{0} + e^{i\phi/2}\sin\frac{\theta}{2}\ket{1}$ \\
+\end{tabular}
+
+% \begin{tabular}{cc}
+%  \multirow{2}{*}{} & $ \ket{\psi}=\alpha\ket{0}+\beta\ket{1} = \begin{pmatrix}\alpha\cr \beta\end{pmatrix}$  
+% \cline{2-2} 
+% & $\ket{\psi}=e^{-i\phi/2}\cos\frac{\theta}{2}\ket{0} + e^{i\phi/2}\sin\frac{\theta}{2}\ket{1}$
+% 
+% \end{tabular}
+% \end{center}
+}
+
 
 \frame{
 \frametitle{ЭПР-парадокс}
@@ -375,37 +433,77 @@ $ p_i \geq 0, \sum_{i=1}^{n} p_i =1 $ & $ \alpha \in \mathbb{C},  \sum_{i=1}^{n}
 \frame{
 \frametitle{Запутаность}
 
-% TODO Запутаность
+Сепарабельное состояние:
+\begin{equation}
+   (\alpha\ket{0} + \beta\ket{1}) \otimes (\gamma\ket{0} + \delta\ket{1}) = 
+   \alpha\gamma\ket{00} + \alpha\delta\ket{01} +\beta\gamma\ket{10} +\beta\delta\ket{11} 
+\end{equation}
+
+Несепарабельное состояние:
+\begin{equation}
+ \frac{\ket{00}+\ket{11}}{\sqrt{2}}
+\end{equation}
+
 }
 
 
 \frame{
 
 \frametitle{Квантовые схемы}
-% TODO Квантовые потоки
+\includegraphics[scale=1.5]{test2.pdf}
+}
+\frame{
+\frametitle{Квантовые схемы}
+\begin{center}
+\begin{tabular}[c]{c|c|c}
+$\X$ & $\begin{pmatrix}0 & 1\cr 1 & 0\end{pmatrix}$ & $\X\ket{0} = \ket{1}$\\
+& & $\X \ket{1} = \ket{0}$ \\ \hline
+& & \\ 
+$\Z$ & $\begin{pmatrix}1 & 0\cr 0 & -1\end{pmatrix}$ & $\Z\ket{0} = \ket{0}$\\
+& & $\Z\ket{1} = -\ket{1}$ \\ \hline
+& & \\ 
+$\Had$ & $\begin{pmatrix}\frac{1}{\sqrt{2}} & \frac{1}{\sqrt{2}}\cr \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}\end{pmatrix}$ & $\Had\ket{0} = \ket{+} = \frac{1}{\sqrt{2}}(\ket{0}+\ket{1})$ \\
+& & $\Had\ket{1} = \ket{-} = \frac{1}{\sqrt{2}}(\ket{0}-\ket{1})$
+\end{tabular}
+\end{center}
+
+
 }
 \frame{
 
 \frametitle{Квантовые схемы}
+\begin{center}
+\includegraphics[scale=0.25]{cnot.pdf} 
+\end{center}
+% \[
+% \begin{pmatrix}1 & 0 & 0 & 0\cr 0 & 1 & 0 & 0\cr 0 & 0 & 0 & 1\cr 0 & 0 & 1 & 0\end{pmatrix}
+% \]
+
+
+\begin{align*}
+\ket{00} \to \ket{00}  \\ 
+\ket{01} \to \ket{00}\\ 
+\ket{10} \to \ket{11} \\ 
+\ket{11} \to \ket{10}
+\end{align*}
 
 }
-\frame{
-
-\frametitle{Квантовые схемы}
-
-}
-\frame{
-
-\frametitle{Квантовые схемы}
-
-}
-
-
+% \frame{
+% 
+% \frametitle{Квантовые схемы}
+% 
+% }
+% 
+% 
+% \frame{
+% 
+% \frametitle{Квантовые схемы -- обратимость}
+% 
+% }
 
 % % % % % % % % % % % % % % 
 
 \frame{
-
 \frametitle{Джозефсоновские кубиты}
 \begin{center}
  \includegraphics[scale=0.4]{q_jj.pdf}
@@ -415,19 +513,17 @@ $ p_i \geq 0, \sum_{i=1}^{n} p_i =1 $ & $ \alpha \in \mathbb{C},  \sum_{i=1}^{n}
 }
 
 
+% \frame{
+% \frametitle{Джозефсоновские кубиты}
+% \begin{center}
+% 
+%  \includegraphics[scale=1]{jj.pdf} 
+%  
+% 
+% \end{center}
+% }
+
 \frame{
-
-\frametitle{Джозефсоновские кубиты}
-\begin{center}
-
- \includegraphics[scale=1]{jj.pdf} 
- 
-
-\end{center}
-}
-
-\frame{
-
 \frametitle{D-Wave}
 \begin{center}
  \includegraphics[scale=0.1]{dw.pdf}
@@ -438,25 +534,100 @@ Sergio Boixo, Troels F. Rønnow, Sergei V. Isakov, Zhihui Wang, David Wecker, Da
 }
 
 % % % % % % % % % % % % % % 
+\frame{
+\frametitle{Алгоритм Гровера}
+Сначала формируют равномернe суперпозицию всех состояний: $\operatorname{H}^{\otimes n}\ket{0} = \frac{1}{\sqrt{N}}\sum_x\ket{x}$. Чуть дальше будет обозначать для краткости равномерную суперпозицию как $\ket{\psi}$ Потом последовательно применяется оператор Гровера: 
+\begin{enumerate}
+ \item К входу применяется оракул $O$: $\ket{x} \to (-1)^{f(x)} \ket{x} $ Т.е. это единичная матрица, где на месте ответов стоят -1. \footnote{Очевидно, что $O^2=I$, так что унитарность сохраняется.}
+ \item Опять преобразование Адамара $\operatorname{H}^{\otimes n}$
+ \item Условный сдвиг фазы: $\ket{x} \to -(-1)^{\delta_{0x}\ket{x}}$, этой операции соответствует унитарный оператор $\ket{0}\bra{0}-I$.
+%  Это тоже унитарная операция: $(\frac{2}{N} - 1)^2 + (N-1)(\frac{2}{N})^2 = \frac{4}{N^2} - \frac{4}{N} + 1 + \frac{4}{N} - \frac{4}{N^2} = 1$ 
+ \item Опять преобразование Адамара $\operatorname{H}^{\otimes n}$
+\end{enumerate}
+\[
+ G =  (\ket{\psi}\bra{\psi}-I)O
+\]
+
+}
 
 \frame{
+\frametitle{Алгоритм Гровера}
+\begin{align*}
+ \Qcircuit @C=1em @R=.7em {
+                   &         &                      &                         &                      & \ustick{\text{Оператор Гровера G:}} \\
+  \lstick{\ket{0}} & /^n \qw & \gate{H^{\otimes n}} & \multigate{1}{O} & \gate{H^{\otimes n}} & \gate{2 \ket{\psi}\bra{\psi} - I_n}         & \gate{H^{\otimes n}} & \qw & \cdots & & \meter & \cw \\
+  \lstick{\ket{1}} & \qw     & \gate{H}             & \ghost{O}        & \qw                  & \qw                                       & \qw                  & \qw & \cdots & \\
+                   &         &                      &                         &                      & \dstick{\text{Выполняется $O(\sqrt{N})$ раз}}
+  \gategroup{2}{5}{2}{7}{.7em}{^\}}
+  \gategroup{2}{4}{3}{10}{.7em}{_\}}
+ }
+\end{align*}
 
-\frametitle{Универсальная задача перебора}
-% TODO Универсальная задача перебора
+
+}
+
+\frame{
+\frametitle{Геометрическая интерпритация алгоритма Гровера}
+% Физический смысл оператора G довольно простост -- это вращение в двухмерном пространстве, порождаемом вектором $\ket{\psi}$ и ветором-решением. 
+Мы можем переписать $\ket{\psi}$, как:
+\[
+ \ket{\psi} = \sqrt{\frac{N-M}{N}} \ket{\alpha} + \sqrt{\frac{M}{N}}\ket{\beta}=\cos{\frac{\theta}{2}}\ket{\alpha} + \sin{\frac{\theta}{2}}\ket{\beta}
+\]
+,где $\ket{\alpha}=\frac{1}{\sqrt{N-M}}\sum_{\neg f(x)}\ket{x}$ и $\ket{\beta}=\frac{1}{\sqrt{M}}\sum_{f(x)}\ket{x}$
+
+
+
 \begin{center}
-\includegraphics[scale=0.3]{grover.pdf}
+\begin{tikzpicture}[scale=2]
+ % \clip (-4.63205,-1.88345) rectangle (4.06915,1.88345);
+% \draw [help lines] (0,0) grid (1,1);
+% \draw [help lines] (-1,0) grid (0,1);
+% \draw [help lines] (0,-1) grid (1,0);
+% \draw [help lines] (-1,-1) grid (0,0);
+\draw [color=black,->] (-1,0) -- (1,0);
+\draw [color=black,->] (0,-1) -- (0,1);
+%% вектор;
+\draw[red, line width=1pt, solid, ->] (0,0) -- (0.75,0.25);
+\draw[green, line width=1pt, solid, ->] (0,0) -- (0.75,-0.25);
+\draw[blue, line width=1pt, solid, ->] (0,0) -- (0.25,0.75);
+
+\draw[lightgrey, dashed] (0.75,0.25) -- (0.75,-0.25);
+\draw[darkgrey, dashed] (0.75,-0.25) -- (0.25,0.75);
+
+\node (X) at (1.2,0) {$\ket{\alpha}$};
+\node (Y) at (0,1.1) {$\ket{\beta}$};
+\node (P) at (0.85,0.35) {$\ket{\psi}$};
+\node (P2) at (0.85,-0.35) {$\operatorname{O}\ket{\psi}$};
+\node (P3) at (0.35,0.85) {$\operatorname{G}\ket{\psi}$};
+\end{tikzpicture}
+% \includegraphics[scale=0.45]{grvr.pdf}
 \end{center}
+
 }
 
-\frame{
 
+\frame{
 \frametitle{Оптимальность алгоритма Гровера...}
+% \[
+%  G\ket{\psi} = \cos{\frac{3\theta}{2}}\ket{\alpha} + \sin{\frac{3\theta}{2}}\ket{\beta}
+% \]
+\[
+ G^k \ket{\psi} = \cos{\frac{(2k+1)\theta}{2}}\ket{\alpha} + \sin{\frac{(2k+1)\theta}{2}}\ket{\beta}
+\]
+И необходимое количество итераций:
+\[
+ R = \lfloor \arcsin{\frac{\sqrt{M/N}}{\theta}} \rfloor \stackrel{M \leq N/2}{=} \lfloor \frac{\pi}{4} \sqrt{\frac{N}{M}} \rfloor
+\]
+\begin{theor}
+ Алгоритм Гровера -- оптимальный
+\end{theor}
+% Идея доказательства состоит в оценке $D_k$ -- меры отклонения оракулом после $k$ вызовов. Она растет не быстрее, чем $O(k^2)$ и имеет порядок $\Omega(N)$, откуда будет следовать, что необходимо не меньше  $\Omega(\sqrt{N})$ обращений к оракулу. 
+% \[
+%  O(\sqrt{N}) \wedge \Omega(\sqrt{N}) \Rightarrow \Theta(\sqrt{N})
+% \]
 
 }
-
-
 \frame{
-
 \frametitle{Оптимальность алгоритма Гровера... или почему $\mathcal{P}\neq\mathcal{NP} $}
 \begin{enumerate}
  \item Линейность\footnote{В смысле линейность \textbf{интегрального оператора}, а не подинтегрального выражения!} квантовой механики $\rightarrow$ Предел Гровера $\sqrt{N}$
@@ -506,174 +677,189 @@ Sergio Boixo, Troels F. Rønnow, Sergei V. Isakov, Zhihui Wang, David Wecker, Da
 
 
 \frame{
-
 \frametitle{Алгоритм Шора}
 % TODO Алгоритм Шора
+\[
+ N=pq
+\]
 
+Факторизация сводится к так называемому поиску периода:
+\begin{enumerate}
+ \item Выбрать случайный остаток $a$ по модулю $N$
+
+ \item Проверить $\textrm{НОД}(a,N)=1$
+
+ \item Найти порядок $r$ остатка $a$ по модулю $N$
+\begin{defin}
+ \textbf{Порядок} $a$ по модулю $N$  -- минимальное $r$ такое, что $a^r\equiv 1 \mod
+N$  
+\end{defin}
+
+ \item Если $r$ четен, вычислить $\textrm{НОД}(a^{r/2}-1,N)$
+\end{enumerate}
+Собственно алгоритм Шора -- это поиск периода функции $f(x)=a^x \mod N$, который и будет порядком.
 }
 
 \frame{
-
 \frametitle{Алгоритм Шора}
+\begin{itemize}
+ \item На самом деле Алгоритм Шора мы рассматривать не будем :P
+ \item Он просто строит состояние с периодом $r$, а потом ``выуживает'' период с помощью преобразований Фурье.
+ \item Мы поговорим о том, почему же это работает?!
+\end{itemize}
+}
 
+\frame{
+\frametitle{Алгоритм Шора}
+\begin{stat}
+ Алгоритм Шора работает, потому что, разложение на множители единственно.
+\end{stat}
+\begin{center}
+ \includegraphics[scale=0.5]{shor.pdf}
+\end{center}
 }
 
 % % % % % % % % % % % % % % 
 
 \frame{
-
-\frametitle{Симметричные и ассиметричные криптосистемы}
-% TODO Симметричные и ассиметричные криптосистемы
-}
-
-
-\frame{
-
 \frametitle{Задача о скрытой подгруппе}
 % TODO Задача о скрытой подгруппе
+\begin{itemize}
+ \item У нас есть группа G, она имеет подгруппу H. 
+ \item 
+ \begin{defin}
+  $f: G \to X$ -- прячет подгруппу H, если $\forall g_1,g_2 \in G: f(g_1) = f(g_2) \Leftrightarrow g_1H=g_2H$
+ \end{defin}
+\end{itemize}
+
+\begin{astat}
+ \textbf{Задача о скрытой подгруппе} --  задача о восстановлении образующих элементов подгруппы по отображению,  которое принимает  одинаковые значения на всех (левых) классах смежности относительно этой подгруппы. 
+\end{astat}
+
+\begin{stat}
+ Алгоритм  Шора может эффективно решить HSP для конечных \textbf{абелевых} групп. 
+\end{stat}
+
+
+
 
 }
 
 \frame{
+\frametitle{Ну и ЧО?}
+\begin{astat}
+  Большинство специалистов сходятся во мнении, что достаточно стойкие симметричные шифры останутся стойкими и в квантовой модели вычислений
+\end{astat}
 
-\frametitle{Неабелевый случай}
-% TODO Неабелевый случай
+\begin{astat}
+ \textbf{Коммутативные и локально-коммутативных шифры} в опасности. Под этот случай подпадают схема Месси-Омуры, схема направленной подписи, система шифрования Эль-Гамаля, схемы груповой и слепой подписей и т.д. 
+\end{astat}
+\begin{astat}
+ Ничего толком не известно про неабелевый случай.
+\end{astat}
+
 
 }
+
 
 % % % % % % % % % % % % % % 
-
 \frame{
-
-\frametitle{Влияние -- квантовая связь}
-\includegraphics[scale=0.1]{qp1.pdf}
-}
-
-\frame{
-
-\frametitle{Влияние -- квантовая связь}
-\includegraphics[scale=0.1]{qp2.pdf}
-}
-
-\frame{
-
-\frametitle{Влияние -- цифровая физика}
-Широко известные не в столь узких кругах обсуждения ``информационных'' аспектов физики:
+% Все люди от природы стремятся к знанию. Доказательство тому — влечение к чувственным восприятиям: ведь независимо от того, есть от них польза или нет, их ценят ради них самих, и больше всех зрительные восприятия, ибо видение, можно сказать, мы предпочитаем всем остальным восприятиям, не только ради того, чтобы действовать, но и тогда, когда мы не собираемся что-либо делать. И причина этого в том, что зрение больше всех других чувств содействует нашему познанию и обнаруживает много различий [в вещах].
+\frametitle{List of QC simulators}
 \begin{itemize}
- \item Konrad Zuse \textit{Rechnender Raum}\footnote{Вычислительное пространство} (1967)
-\item Lloyd, S., \textit{Programming the Universe: A Quantum Computer Scientist Takes On the Cosmos} (2006)
-\item Хокинг, Прескилл,Сасскинд  и срачик о термодинамике черных дыр, которые ``теряют'' информацию.
-
+ \item http://www.quantiki.org/wiki/List\_of\_QC\_simulators
+ \item curl, grep, sort -u, wc -l, немного магии...
+ \item 95
+ \item ??????
+ \item PROFIT
 \end{itemize}
 
 }
 
-\frame{
-\frametitle{Влияние -- цифровая физика}
-Интерпретации квантовой механики:
-\begin{enumerate}
- \item Копенгагенская
-\item Многомировая
-\item Теории скрытого параметра(Schrödinger, Bohmian Mechanics )
-\end{enumerate}
-\begin{center}
-\large В чем же разница? 
-\end{center}
-
-}
+\newcommand {\Exp} {\mathit{t}}
+\newcommand {\Const} {\mathit{c}}
+\newcommand {\Var} {\mathit{x}}
 
 \frame{
-\frametitle{Влияние -- цифровая физика}
-Интерпретации квантовой механики:
-\begin{enumerate}
- \item Копенгагенская
-\item Многомировая
-\item Теории скрытого параметра(Schrödinger, Bohmian Mechanics )
-\end{enumerate}
-\begin{center}
-\large В чем же разница? 
+\frametitle{Квантовое лямбда-исчисление}
+% \resizebox{.1\hsize}{!}{
+% \resizebox{0.7\hsize}{!}{%
+% \begin{align*}
+% \resizebox{0.7\hsize}{!}{
+% \begin{array}{llll}
+% \scalebox{0.7}{%
+\begin{align*}
+\Exp ::= &{}  &&\textbf{terms:} \\
+      &\Var\  &&\textit{variable} \\
+      &(\lambda \Var.\,\Exp)\   &&\textit{abstraction}   \\
+      &(\Exp\ \Exp)  &&\textit{application} \\
+      &\Const  &&\textit{constant} \\
+      &!\Exp &&\textit{nonlinear term}\\
+      &(\lambda !\Var.\,\Exp)\   &&\textit{nonlinear abstraction}   \\
+\Const ::= &{} &&\textbf{constants:} \\
+     &0\ |\ 1\ |\ \Had\ |\ \phase\ |\ \R\ |\ \cnot\ |\ \X\ |\ \Y\ |\ \Z\ |\ \dots
+\end{align*}    
+% }
+% v ::= &{} &&\textbf{values:} \\
+%       &x &&\textit{variable} \\
+%       &\Const &&\textit{constant} \\
+%       &(\lambda x.\,\Exp) &&\textit{linear abstraction} \\
+%       &(\lambda !x.\,\Exp) &&\textit{nonlinear abstraction} \\
+%       &!\Exp &&\textit{$!$-suspension}   
+% \end{array}
 
+% \resizebox{0.7\hsize}{!}{
+%     $
+%     \begin{array}{l}
+%       p_1(x)=a_0+a_1x+a_2x^2 \\
+%       p_2(x)=b_0+b_1x+b_2x^2+b_3x^3 \\
+%       p_3(x)=c_0+c_1x+c_2x^2+c_3c^3+c_4x^4
+%     \end{array}$%
+%   }
+% \resizebox{0.7\hsize}{!}{$
+%   \Exp ::= &{}  &&\textit{terms:} \\
+%       &\Var\  &&\textit{variable} \\
+%       &(\lambda \Var.\,\Exp)\   &&\textit{abstraction}   \\
+%       &(\Exp\ \Exp)  &&\textit{application} \\
+%       &\Const  &&\textit{constant} \\
+%       &!\Exp &&\textit{nonlinear term}\\
+%       &(\lambda !\Var.\,\Exp)\   &&\textit{nonlinear abstraction}   \\
+%   \Const ::= &{} &&\textit{constants:} \\
+%     &0\ |\ 1\ |\ \Had\ |\ \phase\ |\ \R\ |\ \cnot\ |\ \X\ |\ \Y\ |\ \Z\ |\ \dots
+% v ::= &{} &&\textit{values:} \\
+%       &x &&\textit{variable} \\
+%       &\Const &&\textit{constant} \\
+%       &(\lambda x.\,\Exp) &&\textit{linear abstraction} \\
+%       &(\lambda !x.\,\Exp) &&\textit{nonlinear abstraction} \\
+%       &!\Exp &&\textit{$!$-suspension}   
+%     $}  
+% \end{align*}
 
-
-\Huge РАЗНЫЕ ВСЕЛЕННЫЕ!
-
-\normalsize
-с разными вычислительными ресурсами!
-\end{center}
-
-
-}
-
-\frame{
-
-\frametitle{Влияние -- матан}
-\begin{astat}
-   We should expect a mathematical question to have a definite answer, if and only if we can phrase
-the question in terms of a physical process we can imagine.
-\end{astat}
-
-
-
-David Deutsch
-
-
-
-Новые математические методы, придуманые, пока возились с КК, можно использовать и в мирной жизни:
-\begin{enumerate}
- \item $\epsilon$-approximating polynomials for symmetric functions
-\item Robust polynomials
-\item Lower bounds on locally decodable codes
-\end{enumerate}
-
-}
-
-% \frame{
-% 
-% \frametitle{Влияние -- теория эволюции}
-% 
+% }
+% \rulefig{
+% \begin{align*}
+% \Exp ::= &{}  &&\textit{terms:} \\
+%       &\Var\  &&\textit{variable} \\
+%       &(\lambda \Var.\,\Exp)\   &&\textit{abstraction}   \\
+%       &(\Exp\ \Exp)  &&\textit{application} \\
+%       &\Const  &&\textit{constant} \\
+%       &!\Exp &&\textit{nonlinear term}\\
+%       &(\lambda !\Var.\,\Exp)\   &&\textit{nonlinear abstraction}   \\
+% \Const ::= &{} &&\textit{constants:} \\
+%     &0\ |\ 1\ |\ \Had\ |\ \phase\ |\ \R\ |\ \cnot\ |\ \X\ |\ \Y\ |\ \Z\ |\ \dots
+% v ::= &{} &&\textit{values:} \\
+%       &x &&\textit{variable} \\
+%       &\Const &&\textit{constant} \\
+%       &(\lambda x.\,\Exp) &&\textit{linear abstraction} \\
+%       &(\lambda !x.\,\Exp) &&\textit{nonlinear abstraction} \\
+%       &!\Exp &&\textit{$!$-suspension}  
+% \end{align*}
 % }
 
-
-\frame{
-
-\frametitle{Влияние -- теория сознания}
-\begin{astat}
-If we want a machine to be intelligent, it can't also be infallible. There are theorems that say almost exactly that.
- 
-\end{astat}
-Turing
-
-\begin{enumerate}
- \item Consciousness is reducible to computation (Strong-AI)
- \item Consciousness can be simulated by a computer, but the simulation couldn't produce "real understanding" (John Searle)
- \item Consciousness can't even be simulated by computer, but nevertheless has a scientific explanation (Penrose)
- \item Consciousness doesn't have a scientific explanation at all  (99\% \sout{хомячков} населения)
-\end{enumerate}
-
-}
-
-\frame{
-
-\frametitle{Аналитическая машина}
-\begin{center}
- \includegraphics[scale=0.8]{de.pdf}
-
-\end{center}
-
-}
-
-
-
-% % % % % % % % % % % % % % 
-\frame{
-
-\frametitle{Квантовое лямбда-исчисление}
-% TODO Квантовое лямбда-исчисление
 }
 
 
 \frame{
-
 \frametitle{Scheme simulator}
 \begin{description}
   \item[Что?] Scheme
@@ -681,6 +867,18 @@ Turing
  \item[Кто виноват?] André van Tonder.
 \end{description}
 }
+
+
+
+\frame{
+\frametitle{Maxima -- qinf}
+\begin{description}
+  \item[Что?] Maxima
+ \item[Где?] http://www.johnlapeyre.com/qinf/
+ \item[Кто виноват?] G. John Lapeyre, Jr.
+\end{description}
+}
+
 
 % \frame{
 % 
@@ -729,29 +927,134 @@ Turing
 % 
 % }
 
-\frame{
 
-\frametitle{Maxima -- qinf}
-\begin{description}
-  \item[Что?] Maxima
- \item[Где?] http://www.johnlapeyre.com/qinf/
- \item[Кто виноват?] G. John Lapeyre, Jr.
-\end{description}
+
+
+% % % % % % % % % % % % % % 
+\frame{
+\frametitle{Влияние -- квантовая связь}
+\includegraphics[scale=0.1]{qp0.pdf}
 }
 
 \frame{
-\frametitle{List of QC simulators}
+\frametitle{Влияние -- квантовая связь}
+\includegraphics[scale=0.1]{qp1.pdf}
+}
+
+\frame{
+\frametitle{Влияние -- квантовая связь}
+\includegraphics[scale=0.1]{qp2.pdf}
+}
+
+\frame{
+\frametitle{Влияние -- цифровая физика}
+Широко известные не в столь узких кругах обсуждения ``информационных'' аспектов физики:
 \begin{itemize}
- \item http://www.quantiki.org/wiki/List\_of\_QC\_simulators
- \item curl, grep, sort -u, wc -l, немного магии...
- \item 95
- \item ??????
- \item PROFIT
+ \item Konrad Zuse \textit{Rechnender Raum}\footnote{Вычислительное пространство} (1967)
+\item Lloyd, S., \textit{Programming the Universe: A Quantum Computer Scientist Takes On the Cosmos} (2006)
+\item Хокинг, Прескилл,Сасскинд  и срачик о термодинамике черных дыр, которые ``теряют'' информацию.
+
 \end{itemize}
 
 }
 
+\frame{
+\frametitle{Влияние -- цифровая физика}
+Интерпретации квантовой механики:
+\begin{enumerate}
+ \item Копенгагенская
+\item Многомировая
+\item Теории скрытого параметра(Schrödinger, Bohmian Mechanics )
+\end{enumerate}
+\begin{center}
+\large В чем же разница? 
+\end{center}
 
+}
+
+\frame{
+\frametitle{Влияние -- цифровая физика}
+Интерпретации квантовой механики:
+\begin{enumerate}
+ \item Копенгагенская
+\item Многомировая
+\item Теории скрытого параметра(Schrödinger, Bohmian Mechanics )
+\end{enumerate}
+\begin{center}
+\large В чем же разница? 
+
+
+
+\Huge РАЗНЫЕ ВСЕЛЕННЫЕ!
+
+\normalsize
+с разными вычислительными ресурсами!
+\end{center}
+
+
+}
+
+\frame{
+\frametitle{Влияние -- матан}
+\begin{astat}
+   We should expect a mathematical question to have a definite answer, if and only if we can phrase
+the question in terms of a physical process we can imagine.
+\end{astat}
+
+
+
+David Deutsch
+
+
+
+Новые математические методы, придуманые, пока возились с КК, можно использовать и в мирной жизни:
+\begin{enumerate}
+ \item $\epsilon$-approximating polynomials for symmetric functions
+\item Robust polynomials
+\item Lower bounds on locally decodable codes
+\end{enumerate}
+
+}
+
+% \frame{
+% 
+% \frametitle{Влияние -- теория эволюции}
+% 
+% }
+
+
+\frame{
+\frametitle{Влияние -- теория сознания}
+\begin{astat}
+If we want a machine to be intelligent, it can't also be infallible. There are theorems that say almost exactly that.
+ 
+\end{astat}
+Turing
+
+\begin{enumerate}
+ \item Consciousness is reducible to computation (Strong-AI)
+ \item Consciousness can be simulated by a computer, but the simulation couldn't produce "real understanding" (John Searle)
+ \item Consciousness can't even be simulated by computer, but nevertheless has a scientific explanation (Penrose)
+ \item Consciousness doesn't have a scientific explanation at all  (99\% \sout{хомячков} населения)
+\end{enumerate}
+%  Prof. Martin Plenio, Universität Ulm
+% Abstract: In this lecture I will introduce some of the questions that we may wish to answer in quantum biology. Then I will focus on excitation energy transport in photosynthetic complexes. I will explain the crucial role of the interplay of quantum coherent evolution with environmental noise and provide an explanation of the origin and nature of the long-lived coherences that have been observed in the recent 2-D spectroscopy experiments of the FMO complex.
+}
+
+% \frame{
+% \frametitle{Влияние -- теория сознания}
+% 
+% }
+
+
+\frame{
+\frametitle{Аналитическая машина}
+\begin{center}
+ \includegraphics[scale=0.8]{de.pdf}
+
+\end{center}
+
+}
 
 
 
@@ -759,7 +1062,6 @@ Turing
 
 % % % % % % % % % % % % % % 
 \frame{
-
 \frametitle{Что почитать?}
 Книги/лекции:
 \begin{itemize}
@@ -793,9 +1095,8 @@ Turing
 % % % % % % % % % % % % % % 
 
 \frame{
-
-\begin{center}
  \frametitle{Feci, quod potui, faciant meliora potentes}
+\begin{center}
 \Huge Dixi\end{center}
 }
 
