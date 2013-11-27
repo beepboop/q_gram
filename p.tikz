@@ -1,0 +1,18 @@
+\newcommand{\bra}[1]{{\left\langle{#1}\right\vert}}
+\newcommand{\ket}[1]{{\left\vert{#1}\right\rangle}}
+\begin{tikzpicture}
+ % \clip (-4.63205,-1.88345) rectangle (4.06915,1.88345);
+% \draw [help lines] (0,0) grid (1,1);
+% \draw [help lines] (-1,0) grid (0,1);
+% \draw [help lines] (0,-1) grid (1,0);
+% \draw [help lines] (-1,-1) grid (0,0);
+\draw [color=black,->] (-1,0) -- (1,0);
+\draw [color=black,->] (0,-1) -- (0,1);
+%% вектор;
+\draw[blue, line width=1pt, solid, ->] (0,0) -- (0.707,0.707);
+\draw[red, dashed] (0.707,0.707) -- (0.707,0);
+
+\node (X) at (1.2,0) {$\ket{0}$};
+\node (Y) at (0,1.1) {$\ket{1}$};
+\node (P) at (0.85,0.85) {$\ket{\psi}$};
+\end{tikzpicture}
